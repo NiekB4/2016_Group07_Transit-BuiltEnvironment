@@ -31,5 +31,5 @@ def classFactory(iface):  # pylint: disable=invalid-name
     :type iface: QgsInterface
     """
     #
-    from .spatial_decision import SpatialDecision
+    from .pt_support import SpatialDecision
     return SpatialDecision(iface)
