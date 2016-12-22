@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/plugins/PTStopCalc" >
+        <file>icon.png</file>
+    </qresource>
+</RCC>
