@@ -69,6 +69,9 @@ class PTStopCalcDockWidget(QtGui.QDockWidget, FORM_CLASS):
         self.iface = iface
         self.canvas = self.iface.mapCanvas()
 
+
+        self.makeScenarioFolder()
+
         # set up GUI operation signals
 
         # IMPORT TAB
@@ -81,6 +84,7 @@ class PTStopCalcDockWidget(QtGui.QDockWidget, FORM_CLASS):
 
         self.resetWeightsAndLayers.clicked.connect(self.resetCheckBoxes)
 
+        self.computeScenario.clicked.connect(self.calculateScenario)
         self.saveScenario.clicked.connect(self.saveAsScenario)
 
 
@@ -132,13 +136,26 @@ class PTStopCalcDockWidget(QtGui.QDockWidget, FORM_CLASS):
     def resetCheckBoxes(self):
 
         self.landUseCheckBox.setCheckState(0)
-        self.trainStationCheckBox.setCheckState(0)
-        self.retStopCheckBox.setCheckState(0)
+        self.popDensityCheckBox.setCheckState(0)
+        self.accessibleAreaCheckBox.setCheckState(0)
         self.modalShareCheckBox.setCheckState(0)
 
+    def makeScenarioFolder(self):
+        folderName = self.templateFolderDirectory.text()
+        path = folderName + "\Scenarios"
+        os.mkdir(path)
+
+    def calculateScenario(self):
+        
+
     def saveAsScenario(self):
-        project = QgsProject.instance()
-        project.write(QFileInfo())
+         vlayer = QgsVectorLayer()
+         layers = self.iface.mapCanvas().layers()
+         for layer in layers:
+             if layer.name() == "buurt":
+                  vlayer = layer
 
+         print vlayer.name()
 
-
+          # vlayer.
+          # QgsVectorFileWriter.writeAsVectorFormat(vlayer, "c:\\temp\\my_shapes.shp", "CP1250", None, "ESRI Shapefile")
